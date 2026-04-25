@@ -1,314 +1,1305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Automated Commissioning | HVAC Diagnostics for Buildings</title>
-<meta name="description" content="Automated weekly HVAC diagnostics, deficiency reports, and trend analysis for building owners, facility managers, and medical facilities."/>
-<link rel="stylesheet" href="css/style.css"/>
-<style>
-.hero{min-height:100vh;display:flex;align-items:center;padding:100px 5% 60px;position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(37,99,235,.18) 0%,transparent 70%),linear-gradient(180deg,#0a1628 0%,#0d1d3a 100%);}
-#particles{position:absolute;inset:0;z-index:0;}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(79,140,255,.12);border:1px solid rgba(79,140,255,.3);color:var(--blue-light);padding:.35rem .85rem;border-radius:50px;font-size:.8rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:1.5rem;}
-.pulse{animation:pulse-dot 2s infinite;}
-@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{font-size:clamp(2.2rem,4vw,3.4rem);font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:1.5rem;}
-.hero h1 em{font-style:normal;color:var(--blue-light);}
-.hero-sub{font-size:1.1rem;color:var(--muted);line-height:1.75;margin-bottom:2.5rem;max-width:500px;}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
-.typewriter-wrap{display:inline;}
-#typewriter{color:var(--blue-light);border-right:2px solid var(--blue-light);animation:blink .7s step-end infinite;}
-@keyframes blink{0%,100%{border-color:var(--blue-light)}50%{border-color:transparent}}
-.dashboard-mockup{background:#0f2040;border-radius:16px;border:1px solid rgba(79,140,255,.25);box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden;animation:float 6s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.mockup-header{background:#0a1628;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(79,140,255,.15);}
-.mockup-dot{width:10px;height:10px;border-radius:50%;}
-.mockup-title{color:var(--muted);font-size:.75rem;margin-left:8px;}
-.mockup-body{padding:20px;}
-.mockup-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;}
-.mockup-stat{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:14px 12px;text-align:center;}
-.mockup-stat .num{font-size:1.6rem;font-weight:800;color:var(--blue-light);}
-.mockup-stat .lbl{font-size:.68rem;color:var(--muted);margin-top:2px;}
-.mockup-table{width:100%;border-collapse:collapse;}
-.mockup-table th{text-align:left;font-size:.65rem;color:var(--muted);padding:6px 8px;border-bottom:1px solid rgba(79,140,255,.15);text-transform:uppercase;letter-spacing:.5px;}
-.mockup-table td{font-size:.72rem;padding:8px;border-bottom:1px solid rgba(255,255,255,.04);color:#cbd5e1;}
-.hero-badge{position:absolute;background:#162847;border:1px solid rgba(79,140,255,.3);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.4);font-size:.8rem;}
-.hero-badge-1{top:-20px;right:-20px;animation:float 5s ease-in-out infinite 1s;}
-.hero-badge-2{bottom:20px;left:-30px;animation:float 7s ease-in-out infinite .5s;}
-.badge-icon{font-size:1.4rem;}
-.badge-text .top{font-weight:700;}
-.badge-text .bot{color:var(--muted);font-size:.72rem;}
-.stats-bar{background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:50px 5%;}
-.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
-.stat-item .num{font-size:2.6rem;font-weight:800;color:var(--blue-light);line-height:1;}
-.stat-item .lbl{color:var(--muted);font-size:.88rem;margin-top:.4rem;}
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:4rem;}
-.problem-list{display:flex;flex-direction:column;gap:1.5rem;}
-.problem-item{display:flex;gap:1rem;padding:1.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;transition:all .3s;}
-.problem-item:hover{background:rgba(79,140,255,.06);border-color:rgba(79,140,255,.35);transform:translateX(4px);}
-.problem-icon{font-size:1.8rem;flex-shrink:0;margin-top:2px;}
-.problem-text h4{font-size:1rem;font-weight:700;margin-bottom:.4rem;}
-.problem-text p{color:var(--muted);font-size:.9rem;line-height:1.6;}
-.cost-card{background:linear-gradient(135deg,#0f2040,#162847);border:1px solid rgba(79,140,255,.25);border-radius:20px;padding:2.5rem;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);}
-.cost-card .big-num{font-size:4rem;font-weight:900;color:#f87171;line-height:1;}
-.cost-card .big-lbl{color:var(--muted);font-size:.9rem;margin-top:.5rem;margin-bottom:2rem;}
-.cost-divider{height:1px;background:var(--border);margin:1.5rem 0;}
-.cost-vs{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
-.cost-good{font-size:2.4rem;font-weight:800;color:#34d399;margin-top:.5rem;}
-.cost-good-lbl{color:var(--muted);font-size:.85rem;}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;position:relative;}
-.steps::before{content:'';position:absolute;top:60px;left:18%;right:18%;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal));opacity:.4;}
-.step{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;transition:all .35s;position:relative;overflow:hidden;}
-.step::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(37,99,235,.1) 0%,transparent 60%);opacity:0;transition:opacity .35s;}
-.step:hover{transform:translateY(-8px);border-color:rgba(79,140,255,.5);}
-.step:hover::before{opacity:1;}
-.step-num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--teal));display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;margin:0 auto 1.5rem;box-shadow:0 4px 20px rgba(37,99,235,.4);}
-.step-icon{font-size:2.2rem;margin-bottom:1rem;}
-.step h3{font-size:1.2rem;font-weight:700;margin-bottom:.75rem;}
-.step p{color:var(--muted);font-size:.9rem;line-height:1.7;}
-.serve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem;}
-.serve-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all .35s;overflow:hidden;position:relative;}
-.serve-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal));transform:scaleX(0);transition:transform .35s;}
-.serve-card:hover{transform:translateY(-6px);border-color:rgba(79,140,255,.4);}
-.serve-card:hover::after{transform:scaleX(1);}
-.serve-icon{font-size:2.5rem;margin-bottom:1.25rem;}
-.serve-card h3{font-size:1.15rem;font-weight:700;margin-bottom:.75rem;}
-.serve-card p{color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:1.25rem;}
-.serve-card ul{list-style:none;}
-.serve-card ul li{font-size:.83rem;color:var(--muted);padding:.3rem 0;padding-left:1.2rem;position:relative;}
-.serve-card ul li::before{content:'checkmark';content:'✓';position:absolute;left:0;color:var(--blue-light);font-weight:700;}
-.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:4rem;}
-.feature-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all .35s;display:flex;gap:1.5rem;align-items:flex-start;}
-.feature-card:hover{border-color:rgba(79,140,255,.4);background:rgba(255,255,255,.06);transform:translateY(-3px);}
-.feature-icon-wrap{width:52px;height:52px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,rgba(37,99,235,.2),rgba(14,165,233,.2));border:1px solid rgba(79,140,255,.25);display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
-.feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;}
-.feature-card p{color:var(--muted);font-size:.88rem;line-height:1.7;}
-.faq-wrap{max-width:800px;margin:4rem auto 0;}
-.faq-item{border-bottom:1px solid var(--border);}
-.faq-question{width:100%;background:none;border:none;color:var(--white);text-align:left;padding:1.25rem 0;font-size:.95rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:color .2s;font-family:var(--font);}
-.faq-question:hover{color:var(--blue-light);}
-.faq-chevron{font-size:1.2rem;color:var(--blue-light);transition:transform .3s;flex-shrink:0;}
-.faq-item.open .faq-chevron{transform:rotate(45deg);}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;color:var(--muted);font-size:.9rem;line-height:1.75;}
-.faq-item.open .faq-answer{max-height:300px;padding-bottom:1.25rem;}
-@media(max-width:900px){.hero-grid,.problem-grid{grid-template-columns:1fr;}.steps,.serve-grid{grid-template-columns:1fr;}.steps::before{display:none;}.features-grid{grid-template-columns:1fr;}.stats-inner{grid-template-columns:repeat(2,1fr);}.hero-badge{display:none;}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Automated Commissioning delivers weekly HVAC diagnostics, deficiency reports, and trend analysis for medical facilities, surgery centers, and commercial buildings." />
+  <title>Automated Commissioning | Weekly HVAC Diagnostics for Buildings</title>
+  <style>
+    /* ── Reset & Variables ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080f1c;
+      --panel:    #0f1829;
+      --panel-2:  #162036;
+      --panel-3:  #1c2a42;
+      --text:     #e8eefc;
+      --muted:    #8a9bbf;
+      --border:   #1e2d47;
+      --accent:   #4f8cff;
+      --accent-d: #3a7aef;
+      --accent-2: #7c5cfc;
+      --green:    #22c55e;
+      --amber:    #f59e0b;
+      --red:      #ef4444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Animations ─────────────────────────────────────────────────────── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(1.4); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    @keyframes count-up { from { opacity: 0; } to { opacity: 1; } }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(8, 15, 28, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 62px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 9px 20px;
+      border-radius: 8px;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--accent-d); color: #fff; }
+
+    .nav-mobile-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--text);
+    }
+
+    /* ── HERO ────────────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(79,140,255,0.07) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 40% at 20% 80%, rgba(124,92,252,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(79,140,255,0.1);
+      border: 1px solid rgba(79,140,255,0.25);
+      border-radius: 50px;
+      padding: 5px 14px;
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 22px;
+      color: var(--text);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent) 0%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 26px;
+      border-radius: 10px;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent-d); transform: translateY(-1px); color: #fff; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 13px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+    /* ── Hero mock report card ──────────────────────────────────────────── */
+    .hero-visual {
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .report-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(79,140,255,0.08);
+    }
+
+    .report-card-header {
+      background: var(--panel-2);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .rc-dots { display: flex; gap: 6px; }
+    .rc-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+    }
+    .rc-dot.r { background: #ff5f57; }
+    .rc-dot.y { background: #febc2e; }
+    .rc-dot.g { background: #28c840; }
+
+    .rc-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-left: 4px;
+    }
+
+    .rc-delivered {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .report-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .report-stat {
+      padding: 16px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .report-stat:last-child { border-right: none; }
+
+    .report-stat-num {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .report-stat-num.blue   { color: var(--accent); }
+    .report-stat-num.amber  { color: var(--amber); }
+    .report-stat-num.green  { color: var(--green); }
+
+    .report-stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .report-table { width: 100%; border-collapse: collapse; }
+
+    .report-table th {
+      background: rgba(79,140,255,0.05);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      padding: 8px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .report-table td {
+      font-size: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(30,45,71,0.6);
+      color: var(--text);
+    }
+
+    .report-table tr:last-child td { border-bottom: none; }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 50px;
+    }
+    .status-ok    { background: rgba(34,197,94,0.15);  color: var(--green); }
+    .status-alert { background: rgba(239,68,68,0.15);  color: var(--red); }
+    .status-rev   { background: rgba(245,158,11,0.15); color: var(--amber); }
+
+    .report-footer {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34,197,94,0.06);
+      border-top: 1px solid rgba(34,197,94,0.15);
+    }
+
+    .rf-check {
+      width: 20px; height: 20px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .rf-text { font-size: 12px; color: var(--green); font-weight: 600; }
+    .rf-sub  { font-size: 11px; color: var(--muted); margin-left: auto; }
+
+    /* ── SECTION COMMONS ─────────────────────────────────────────────────── */
+    section { padding: 96px 0; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-heading {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 580px;
+    }
+
+    .section-header { margin-bottom: 56px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* ── STATS BAR ───────────────────────────────────────────────────────── */
+    .stats-bar {
+      padding: 0;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-bar-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-item {
+      padding: 28px 24px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── PROBLEM SECTION ─────────────────────────────────────────────────── */
+    .problem-section { background: var(--bg); }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .problem-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .problem-card:hover { border-color: rgba(79,140,255,0.3); transform: translateY(-3px); }
+
+    .problem-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .problem-icon.amber { background: rgba(245,158,11,0.12); }
+    .problem-icon.red   { background: rgba(239,68,68,0.12); }
+    .problem-icon.blue  { background: rgba(79,140,255,0.12); }
+
+    .problem-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .problem-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .cost-callout {
+      margin-top: 48px;
+      background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(245,158,11,0.06));
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 16px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .cost-num {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--red);
+      letter-spacing: -1.5px;
+      white-space: nowrap;
+    }
+
+    .cost-text h4 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .cost-text p  { font-size: 14px; color: var(--muted); }
+
+    /* ── HOW IT WORKS ────────────────────────────────────────────────────── */
+    .how-section { background: var(--panel); }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.67% + 16px);
+      right: calc(16.67% + 16px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--border), var(--accent), var(--border));
+      z-index: 0;
+    }
+
+    .step-card {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .step-card:hover { border-color: rgba(79,140,255,0.4); transform: translateY(-3px); }
+
+    .step-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(79,140,255,0.12);
+      border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .step-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .step-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    .step-bullets {
+      list-style: none;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step-bullets li {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .step-bullets li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── WHO WE SERVE ────────────────────────────────────────────────────── */
+    .serve-section { background: var(--bg); }
+
+    .serve-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .serve-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 26px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .serve-card:hover { border-color: rgba(79,140,255,0.35); transform: translateY(-3px); }
+    .serve-card.featured {
+      border-color: rgba(79,140,255,0.35);
+      background: linear-gradient(160deg, rgba(79,140,255,0.05) 0%, var(--panel) 60%);
+    }
+
+    .serve-icon-wrap {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+    .serve-icon-wrap.blue   { background: rgba(79,140,255,0.12); }
+    .serve-icon-wrap.purple { background: rgba(124,92,252,0.12); }
+    .serve-icon-wrap.teal   { background: rgba(20,184,166,0.12); }
+
+    .serve-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .serve-card > p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+
+    .serve-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .serve-list li {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 0;
+      border-top: 1px solid rgba(30,45,71,0.8);
+    }
+    .serve-list li:first-child { border-top: none; padding-top: 0; }
+    .serve-list li::before {
+      content: '→';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── WHAT YOU GET ────────────────────────────────────────────────────── */
+    .features-section { background: var(--panel); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 22px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(79,140,255,0.3); transform: translateY(-2px); }
+
+    .feature-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(79,140,255,0.1);
+      border: 1px solid rgba(79,140,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── FAQ ─────────────────────────────────────────────────────────────── */
+    .faq-section { background: var(--bg); }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: rgba(79,140,255,0.3); }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    .faq-chevron {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(79,140,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.25s, background 0.2s;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); background: rgba(79,140,255,0.2); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      padding: 0 22px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 22px 20px;
+    }
+
+    /* ── CTA SECTION ─────────────────────────────────────────────────────── */
+    .cta-section {
+      background: var(--panel);
+      padding: 80px 0;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(79,140,255,0.1) 0%, rgba(124,92,252,0.08) 100%);
+      border: 1px solid rgba(79,140,255,0.25);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+    }
+
+    .cta-box p {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 48px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-top: 12px;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col ul li a {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .footer-col ul li a:hover { color: var(--text); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(138,155,191,0.5);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ── MOBILE ──────────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .exp-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .nav-links { display: none; }
+      .nav-mobile-btn { display: block; }
+
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { order: -1; }
+      .hero { padding: 90px 0 50px; min-height: auto; }
+
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid var(--border); }
+      .stat-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+
+      .problem-grid  { grid-template-columns: 1fr; }
+      .steps-grid    { grid-template-columns: 1fr; }
+      .steps-grid::before { display: none; }
+      .serve-grid    { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .cost-callout  { flex-direction: column; text-align: center; }
+
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+
+      .cta-box { padding: 36px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .report-stats { grid-template-columns: repeat(3, 1fr); }
+      section { padding: 64px 0; }
+    }
+  </style>
 </head>
 <body>
-<canvas id="particles"></canvas>
-<nav id="navbar">
-  <a href="index.html" class="nav-logo">Automated<span>Commissioning</span></a>
-  <ul class="nav-links">
-    <li><a href="how-it-works.html">How It Works</a></li>
-    <li><a href="who-we-serve.html">Who We Serve</a></li>
-    <li><a href="sample-report.html">Sample Report</a></li>
-    <li><a href="https://alarm-review-app.vercel.app/demo/" target="_blank">Dashboard Demo</a></li>
-    <li><a href="faq.html">FAQ</a></li>
-  </ul>
-  <a href="contact.html" class="nav-cta">Request a Demo &rarr;</a>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="how-it-works.html">How It Works</a>
-  <a href="who-we-serve.html">Who We Serve</a>
-  <a href="sample-report.html">Sample Report</a>
-  <a href="https://alarm-review-app.vercel.app/demo/" target="_blank">Dashboard Demo</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html" class="btn-primary" style="margin-top:1rem;">Request a Demo</a>
-</div>
 
-<section class="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="hero-eyebrow"><span class="pulse">&#9679;</span> Automated Building Diagnostics</div>
-      <h1>Your Building Has <em><span id="typewriter" data-words="Hidden Problems|Wasted Energy|Missed Alarms|Silent Failures"></span></em><br/>Right Now</h1>
-      <p class="hero-sub">Most HVAC problems don't announce themselves &mdash; they quietly waste energy, drive up repair costs, and put occupant comfort at risk for weeks before anyone notices. We find them automatically, every single week, before they become expensive emergencies.</p>
-      <div class="hero-btns">
-        <a href="contact.html" class="btn-primary">Get a Free Demo &rarr;</a>
-        <a href="sample-report.html" class="btn-secondary">&#128196; See a Sample Report</a>
+<!-- ── NAV ────────────────────────────────────────────────────────────────── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Automated<span>Commissioning</span></a>
+      <ul class="nav-links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#who-we-serve">Who We Serve</a></li>
+        <li><a href="#what-you-get">What You Get</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#contact" class="nav-cta">Request a Demo →</a>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
       </div>
     </div>
-    <div style="position:relative;">
-      <div class="hero-badge hero-badge-1">
-        <div class="badge-icon">&#128680;</div>
-        <div class="badge-text"><div class="top">Issue Detected</div><div class="bot">VAV-11 heating anomaly &bull; 2 days</div></div>
-      </div>
-      <div class="dashboard-mockup">
-        <div class="mockup-header">
-          <div class="mockup-dot" style="background:#f87171"></div>
-          <div class="mockup-dot" style="background:#fbbf24"></div>
-          <div class="mockup-dot" style="background:#34d399"></div>
-          <span class="mockup-title">Weekly Diagnostic &mdash; Eye Surgery Center</span>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Automated Building Diagnostics
         </div>
-        <div class="mockup-body">
-          <div class="mockup-row">
-            <div class="mockup-stat"><div class="num">14</div><div class="lbl">Systems Checked</div></div>
-            <div class="mockup-stat"><div class="num" style="color:#fbbf24">3</div><div class="lbl">Issues Found</div></div>
-            <div class="mockup-stat"><div class="num" style="color:#34d399">11</div><div class="lbl">Passing</div></div>
+        <h1>Your Building Has <em>Problems Right Now</em> — We Find Them First</h1>
+        <p class="hero-sub">Most HVAC problems don't announce themselves. They quietly waste energy, drive up repair costs, and put occupant comfort at risk for weeks before anyone notices. We find them automatically, nightly after hours — before they become expensive emergencies.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Get a Free Demo →</a>
+          <a href="#how-it-works" class="btn-ghost">📄 See How It Works</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="report-card">
+          <div class="report-card-header">
+            <div class="rc-dots">
+              <div class="rc-dot r"></div>
+              <div class="rc-dot y"></div>
+              <div class="rc-dot g"></div>
+            </div>
+            <span class="rc-title">Weekly Diagnostic — Eye Surgery Center of North Dallas</span>
+            <span class="rc-delivered">✓ Delivered</span>
           </div>
-          <table class="mockup-table">
-            <thead><tr><th>Zone</th><th>Check</th><th>Status</th><th>Days</th></tr></thead>
+          <div class="report-stats">
+            <div class="report-stat">
+              <div class="report-stat-num blue">14</div>
+              <div class="report-stat-label">Systems Checked</div>
+            </div>
+            <div class="report-stat">
+              <div class="report-stat-num amber">3</div>
+              <div class="report-stat-label">Issues Found</div>
+            </div>
+            <div class="report-stat">
+              <div class="report-stat-num green">11</div>
+              <div class="report-stat-label">Passing</div>
+            </div>
+          </div>
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Zone</th>
+                <th>Check</th>
+                <th>Status</th>
+                <th>Days</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td>OR Suite 1</td><td>Room Pressure</td><td><span class="badge badge-ok">OK</span></td><td>&mdash;</td></tr>
-              <tr><td>Pre-Op</td><td>VAV Heating</td><td><span class="badge badge-warn">Review</span></td><td>2</td></tr>
-              <tr><td>Sterile Storage</td><td>Humidity</td><td><span class="badge badge-ok">OK</span></td><td>&mdash;</td></tr>
-              <tr><td>Lobby EF</td><td>Fan Status</td><td><span class="badge badge-crit">Alert</span></td><td>1</td></tr>
+              <tr>
+                <td>OR Suite 1</td>
+                <td>Room Pressure</td>
+                <td><span class="status-pill status-ok">OK</span></td>
+                <td style="color:var(--muted)">—</td>
+              </tr>
+              <tr>
+                <td>Pre-Op</td>
+                <td>VAV Heating</td>
+                <td><span class="status-pill status-rev">Review</span></td>
+                <td style="color:var(--amber)">2</td>
+              </tr>
+              <tr>
+                <td>Sterile Storage</td>
+                <td>Humidity</td>
+                <td><span class="status-pill status-ok">OK</span></td>
+                <td style="color:var(--muted)">—</td>
+              </tr>
+              <tr>
+                <td>Lobby EF</td>
+                <td>Fan Status</td>
+                <td><span class="status-pill status-alert">Alert</span></td>
+                <td style="color:var(--red)">1</td>
+              </tr>
             </tbody>
           </table>
+          <div class="report-footer">
+            <div class="rf-check">✓</div>
+            <div>
+              <div class="rf-text">Report Delivered</div>
+            </div>
+            <div class="rf-sub">Every Sunday, 6:00 AM</div>
+          </div>
         </div>
-      </div>
-      <div class="hero-badge hero-badge-2">
-        <div class="badge-icon">&#9989;</div>
-        <div class="badge-text"><div class="top">Report Delivered</div><div class="bot">Every Monday, 6:00 AM</div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── STATS BAR ───────────────────────────────────────────────────────────── -->
 <div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item reveal"><div class="num"><span class="counter" data-target="100" data-suffix="%">0%</span></div><div class="lbl">Browser-Based BAS Compatible</div></div>
-    <div class="stat-item reveal reveal-delay-1"><div class="num"><span class="counter" data-target="24" data-suffix="hr">0hr</span></div><div class="lbl">Setup to First Report</div></div>
-    <div class="stat-item reveal reveal-delay-2"><div class="num"><span class="counter" data-target="7" data-suffix="x">0x</span></div><div class="lbl">Cheaper Than Emergency Repairs</div></div>
-    <div class="stat-item reveal reveal-delay-3"><div class="num"><span class="counter" data-target="52" data-suffix="/yr">0/yr</span></div><div class="lbl">Automated Checks Per Year</div></div>
+  <div class="container">
+    <div class="stats-bar-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num" data-target="365">0</div>
+        <div class="stat-label">Automated checks per year</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">33 yrs</div>
+        <div class="stat-label">Field experience reviewing your data</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Browser-based, no hardware required</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">$8,500</div>
+        <div class="stat-label">Avg. unplanned HVAC emergency cost</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<section style="background:var(--navy);">
-  <div class="section-inner">
-    <div class="section-label reveal">The Problem</div>
+<!-- ── PROBLEM ─────────────────────────────────────────────────────────────── -->
+<section class="problem-section" id="problem">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">The Problem</div>
+      <h2 class="section-heading">Your HVAC System Is Talking.<br>Nobody Is Listening.</h2>
+      <p class="section-sub">Every building automation system generates thousands of data points every day. Without someone constantly watching, critical warnings get buried — and small issues become big, expensive bills.</p>
+    </div>
     <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="problem-icon amber">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Problems Linger for Weeks</h3>
+        <p>Without regular checks, a faulty sensor or stuck damper can waste energy and stress equipment for months before anyone notices. By then, a simple fix has become a costly repair.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon red">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Emergency Repairs Cost 10× More</h3>
+        <p>A $200 preventive fix becomes a $3,000 emergency call when a small issue is caught too late. Reactive maintenance always costs more — in parts, labor, and downtime.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Critical Spaces Have Zero Margin</h3>
+        <p>In medical facilities and operating rooms, temperature, humidity, and pressure variances aren't just discomfort — they're compliance violations and patient safety issues.</p>
+      </div>
+    </div>
+    <div class="cost-callout reveal">
+      <div class="cost-num">$8,500</div>
+      <div class="cost-text">
+        <h4>Average cost of an unplanned HVAC emergency repair</h4>
+        <p>Most of these emergencies start as small, detectable issues that were missed for weeks. Automated Commissioning catches them before they reach this point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE CALLOUT ──────────────────────────────────────────────────── -->
+<section style="padding:72px 0;background:var(--panel-2);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" class="reveal exp-grid">
       <div>
-        <h2 class="section-title reveal">Your HVAC System Is <em>Talking</em> &mdash; But Nobody Is Listening</h2>
-        <p class="section-sub reveal">Every building automation system generates thousands of data points every day. Without someone constantly watching, critical warnings get buried &mdash; and small issues become big bills.</p>
-        <div class="problem-list" style="margin-top:2rem;">
-          <div class="problem-item reveal"><div class="problem-icon">&#128197;</div><div class="problem-text"><h4>Problems Linger for Weeks</h4><p>Without regular checks, a faulty sensor or stuck damper can waste energy and stress equipment for months before anyone notices.</p></div></div>
-          <div class="problem-item reveal reveal-delay-1"><div class="problem-icon">&#128176;</div><div class="problem-text"><h4>Emergency Repairs Are Expensive</h4><p>A $200 preventive fix becomes a $3,000 emergency call when a small issue is caught too late. Reactive maintenance always costs more.</p></div></div>
-          <div class="problem-item reveal reveal-delay-2"><div class="problem-icon">&#127973;</div><div class="problem-text"><h4>Critical Spaces Have Zero Margin for Error</h4><p>In medical facilities, operating rooms, and sterile environments, temperature, humidity, and pressure variances aren't just discomfort &mdash; they're compliance and safety issues.</p></div></div>
-        </div>
+        <div class="section-label">The Difference</div>
+        <h2 class="section-heading">Data Alone Doesn't Fix Buildings. Experience Does.</h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-top:16px;">Automated software collects the data. What sets us apart is what happens next — every flagged issue and diagnostic result is reviewed by an HVAC professional with <strong style="color:var(--text);">33 years of field experience</strong>.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-top:14px;">That experience is the reason our clients trust us to tell the difference between a sensor drift and a failing component, a nuisance alarm and an emerging equipment failure. When something looks wrong in your report, there's a seasoned technician behind that diagnosis — not just an algorithm.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-top:14px;">Many of our clients rely on that expertise to understand their results, identify the right course of action, and ensure the correct contractor is dispatched for the job.</p>
       </div>
-      <div class="reveal reveal-delay-1">
-        <div class="cost-card">
-          <div class="big-num">$8,500</div>
-          <div class="big-lbl">Average cost of an unplanned HVAC emergency repair</div>
-          <div class="cost-divider"></div>
-          <div class="cost-vs">vs. catching it early with</div>
-          <div class="cost-good">Automated Commissioning</div>
-          <div class="cost-good-lbl">Automated weekly diagnostics that catch issues before they become emergencies</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 20px;">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);letter-spacing:-1px;line-height:1;">33</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;font-weight:500;">Years of HVAC field experience</div>
+        </div>
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 20px;">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);letter-spacing:-1px;line-height:1;">365</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;font-weight:500;">Nights per year your building is checked</div>
+        </div>
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 20px;">
+          <div style="font-size:36px;font-weight:900;color:var(--green);letter-spacing:-1px;line-height:1;">1×</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;font-weight:500;">A commissioning engineer runs these tests — we run them every night</div>
+        </div>
+        <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px 20px;">
+          <div style="font-size:36px;font-weight:900;color:var(--amber);letter-spacing:-1px;line-height:1;">7AM</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;font-weight:500;">Daily critical equipment status — before surgeries start</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="how-it-works" style="background:linear-gradient(180deg,var(--navy2) 0%,var(--navy) 100%);">
-  <div class="section-inner section-center">
-    <div class="section-label reveal">How It Works</div>
-    <h2 class="section-title reveal">Three Steps. <em>Zero Guesswork.</em></h2>
-    <p class="section-sub reveal">We connect securely to your existing building control system, run tests automatically in the background, and deliver a plain-English report straight to your inbox &mdash; every week, without you lifting a finger.</p>
-    <div class="steps">
-      <div class="step reveal"><div class="step-num">1</div><div class="step-icon">&#128279;</div><h3>Connect</h3><p>We establish a secure link to your browser-based Building Automation System (BAS) &mdash; the computer that controls your building's heating, cooling, and ventilation. No new hardware required. Works locally or remotely.</p></div>
-      <div class="step reveal reveal-delay-2"><div class="step-num">2</div><div class="step-icon">&#9881;&#65039;</div><h3>Test Automatically</h3><p>Every week, our system runs hundreds of automated checks on all your equipment &mdash; fans, heating zones, cooling units, room pressures, airflow rates, and more. It works silently in the background without disrupting operations.</p></div>
-      <div class="step reveal reveal-delay-4"><div class="step-num">3</div><div class="step-icon">&#128203;</div><h3>Receive Your Report</h3><p>You get a clear, prioritized email report showing exactly what passed, what needs attention, and what your team should fix first. No technical jargon &mdash; just actionable information your staff can act on immediately.</p></div>
+<!-- ── HOW IT WORKS ────────────────────────────────────────────────────────── -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-heading">Three Steps. Zero Guesswork.</h2>
+      <p class="section-sub">We connect to your existing building control system, run tests automatically in the background, and deliver a plain-English report to your inbox — every week, without you lifting a finger.</p>
     </div>
-    <div style="margin-top:3rem;" class="reveal"><a href="how-it-works.html" class="btn-outline">Learn More About the Process &rarr;</a></div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3>Secure Connection</h3>
+        <p>We establish a secure link to your Building Automation System — the computer that controls your building's heating, cooling, and ventilation. Think of it like a read-only window into your HVAC data.</p>
+        <ul class="step-bullets">
+          <li>No new hardware required</li>
+          <li>Works with any browser-based BAS</li>
+          <li>Local or remote connection</li>
+          <li>Onboarding timeframe depends on system scope</li>
+        </ul>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">2</div>
+        <h3>Nightly Automated Testing</h3>
+        <p>Every night, after hours, our system runs the same functional checks a commissioning engineer performs — but where a commissioning engineer does this once at project handover, our system does it every single night, automatically and consistently.</p>
+        <ul class="step-bullets">
+          <li>Heating and cooling sequence verification</li>
+          <li>Fan operation and airflow confirmation</li>
+          <li>Equipment alarms and fault history</li>
+          <li>Critical zone temperature and humidity</li>
+        </ul>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">3</div>
+        <h3>Reports Delivered to Your Inbox</h3>
+        <p>A prioritized deficiency report is delivered every Sunday so your team can plan for the week. For medical facilities, a daily morning status email on critical RTUs and OR equipment arrives before surgeries start — so your team has peace of mind before the first patient walks in.</p>
+        <ul class="step-bullets">
+          <li>Weekly summary every Sunday</li>
+          <li>Daily morning critical equipment status</li>
+          <li>Issues ranked by severity</li>
+          <li>Plain language — no technical jargon</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="who-we-serve" style="background:var(--navy);">
-  <div class="section-inner">
-    <div class="section-label section-center reveal">Who We Serve</div>
-    <h2 class="section-title section-center reveal">Built for Buildings Where <em>Conditions Matter</em></h2>
-    <p class="section-sub section-center reveal">We specialize in facilities where temperature, humidity, air pressure, and air quality aren't just about comfort &mdash; they're critical to operations, patient safety, and regulatory compliance.</p>
+<!-- ── WHO WE SERVE ────────────────────────────────────────────────────────── -->
+<section class="serve-section" id="who-we-serve">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Who We Serve</div>
+      <h2 class="section-heading">Built for Buildings Where<br>Conditions Matter</h2>
+      <p class="section-sub">We specialize in facilities where temperature, humidity, air pressure, and air quality directly affect operations, safety, and regulatory compliance.</p>
+    </div>
     <div class="serve-grid">
+      <div class="serve-card featured reveal">
+        <div class="serve-icon-wrap blue">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Medical & Surgical Facilities</h3>
+        <p>Eye surgery centers, ambulatory surgery centers, and specialized clinics where HVAC equipment performance directly affects patient safety and daily operations.</p>
+        <ul class="serve-list">
+          <li>RTU heating and cooling sequence verification</li>
+          <li>OR VAV equipment status — daily, before surgeries start</li>
+          <li>Temperature and humidity monitoring for critical zones</li>
+          <li>BAS alarm tracking and fault history reporting</li>
+          <li>Weekly documented performance for facility records</li>
+        </ul>
+      </div>
       <div class="serve-card reveal">
-        <div class="serve-icon">&#127973;</div>
-        <h3>Medical &amp; Surgical Facilities</h3>
-        <p>Operating rooms, procedure suites, and sterile storage areas require precise environmental control. We monitor the critical parameters that matter most for patient safety and accreditation compliance.</p>
-        <ul>
-          <li>Operating room pressure differentials</li>
-          <li>Air changes per hour (ACH) verification</li>
-          <li>Temperature and humidity compliance</li>
-          <li>Sterile corridor pressure monitoring</li>
-          <li>HVAC alarm response tracking</li>
+        <div class="serve-icon-wrap purple">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <h3>Property Management</h3>
+        <p>Companies managing multiple commercial buildings where HVAC maintenance across a portfolio is difficult to track consistently from one location.</p>
+        <ul class="serve-list">
+          <li>Multi-building overview in one report</li>
+          <li>Catch issues before tenant complaints</li>
+          <li>Identify energy waste driving utility costs</li>
+          <li>Prioritize which buildings need attention first</li>
         </ul>
       </div>
-      <div class="serve-card reveal reveal-delay-2">
-        <div class="serve-icon">&#127970;</div>
-        <h3>Property Management &amp; Building Owners</h3>
-        <p>Managing multiple buildings means you can't be everywhere at once. We give you a weekly overview of every building's HVAC health in one clear report, so you can prioritize where to send your team.</p>
-        <ul>
-          <li>Multi-building overview reporting</li>
-          <li>Energy waste identification</li>
-          <li>Equipment lifespan protection</li>
-          <li>Tenant comfort issue prevention</li>
-          <li>Maintenance cost reduction</li>
-        </ul>
-      </div>
-      <div class="serve-card reveal reveal-delay-4">
-        <div class="serve-icon">&#128295;</div>
+      <div class="serve-card reveal">
+        <div class="serve-icon-wrap teal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+        </div>
         <h3>Facility Managers</h3>
-        <p>You already know your building. We give you the data to back up your decisions, justify maintenance requests, and prove to ownership that the systems are being proactively maintained.</p>
-        <ul>
-          <li>Weekly automated verification</li>
-          <li>Trend data for equipment history</li>
+        <p>In-house facility managers who want proactive HVAC oversight and the hard data to back up maintenance decisions without adding headcount.</p>
+        <ul class="serve-list">
+          <li>Nightly automated verification</li>
+          <li>Trend data and equipment history</li>
           <li>Documentation for service records</li>
-          <li>Early warning before tenant complaints</li>
-          <li>Actionable deficiency reports</li>
+          <li>Early warning before occupant complaints</li>
         </ul>
       </div>
     </div>
-    <div style="margin-top:3rem;text-align:center;" class="reveal"><a href="who-we-serve.html" class="btn-outline">See All the Buildings We Support &rarr;</a></div>
   </div>
 </section>
 
-<section id="features" style="background:linear-gradient(180deg,var(--navy2) 0%,var(--navy) 100%);">
-  <div class="section-inner">
-    <div class="section-label section-center reveal">What You Get</div>
-    <h2 class="section-title section-center reveal">Everything You Need to Stay <em>Ahead of Problems</em></h2>
-    <p class="section-sub section-center reveal">Automated checks, clear reporting, and trend-based insight &mdash; delivered weekly without any manual work on your end.</p>
+<!-- ── WHAT YOU GET ────────────────────────────────────────────────────────── -->
+<section class="features-section" id="what-you-get">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">What You Get</div>
+      <h2 class="section-heading">Everything You Need to Stay<br>Ahead of Problems</h2>
+      <p class="section-sub">Automated checks, clear reporting, and trend-based insight — delivered weekly without any manual work on your end.</p>
+    </div>
     <div class="features-grid">
-      <div class="feature-card reveal"><div class="feature-icon-wrap">&#9989;</div><div><h3>Automated Functional Tests</h3><p>We run the same checks a commissioning engineer would perform &mdash; but automatically, every week. Heating sequences, cooling responses, airflow verification, alarm status, and more.</p></div></div>
-      <div class="feature-card reveal reveal-delay-1"><div class="feature-icon-wrap">&#128196;</div><div><h3>Prioritized Deficiency Reports</h3><p>Delivered every Monday morning, your report shows what failed, how long it's been an issue, what zone it affects, and what your team should do about it &mdash; in plain language.</p></div></div>
-      <div class="feature-card reveal reveal-delay-2"><div class="feature-icon-wrap">&#128200;</div><div><h3>Trend Analysis &amp; History</h3><p>We track every data point over time so you can see patterns before they become problems. Is that zone slowly getting worse? We'll catch it before it fails completely.</p></div></div>
-      <div class="feature-card reveal reveal-delay-3"><div class="feature-icon-wrap">&#128187;</div><div><h3>Live Dashboard Access</h3><p>Your custom dashboard shows all stored data, flagged issues, and equipment history in one place. Accessible anytime from any browser &mdash; no software to install.</p></div></div>
-      <div class="feature-card reveal reveal-delay-1"><div class="feature-icon-wrap">&#128274;</div><div><h3>Read-Only &amp; Non-Disruptive</h3><p>We never change your control system settings. We only read data points and trends to evaluate performance. Your team or controls contractor handles any fixes.</p></div></div>
-      <div class="feature-card reveal reveal-delay-2"><div class="feature-icon-wrap">&#9729;&#65039;</div><div><h3>Works with Any Browser-Based BAS</h3><p>If your building automation system is accessible through a web browser, we can connect to it. No proprietary hardware. No expensive integrations. Setup in as little as 24 hours.</p></div></div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Automated Functional Tests</h3>
+        <p>We run the same checks a commissioning engineer would perform — heating sequences, cooling responses, airflow verification, alarm status — automatically, every week.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+        <h3>Prioritized Deficiency Reports</h3>
+        <p>Delivered every Monday morning. Your report shows what failed, how long it's been an issue, what zone it affects, and what your team should do — in plain language.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <h3>Trend Analysis & History</h3>
+        <p>We track every data point over time so you can see patterns before they become problems. Is a zone slowly getting worse? We'll catch it before it fails completely.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Live Dashboard Access</h3>
+        <p>Your custom dashboard shows all stored data, flagged issues, and equipment history in one place. Accessible anytime from any browser — no software to install.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Minimal Footprint</h3>
+        <p>We operate with a light touch. For heating verification, we perform brief, temporary test commands — the same thing a commissioning engineer does during functional testing. We never make permanent changes to your control logic or programming.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+        <h3>Works with Any Browser-Based BAS</h3>
+        <p>If your building automation system is accessible through a web browser, we can connect to it. No proprietary hardware. No expensive integrations. Up in 24 hours.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section style="background:var(--navy);">
-  <div class="section-inner section-center">
-    <div class="section-label reveal">FAQ</div>
-    <h2 class="section-title reveal">Common Questions, <em>Straight Answers</em></h2>
-    <div class="faq-wrap">
-      <div class="faq-item"><button class="faq-question">What systems do you work with?<span class="faq-chevron">+</span></button><div class="faq-answer">We work with all browser-based control systems. If you can access your Building Automation System (BAS) through a web browser, we can typically connect to it. During setup, we confirm what data points are available and map the signals needed for testing and reporting.</div></div>
-      <div class="faq-item"><button class="faq-question">Do you make any changes to our control system?<span class="faq-chevron">+</span></button><div class="faq-answer">No &mdash; we are focused entirely on testing, verification, and reporting. We only read data points and trends to evaluate how your equipment is performing. We never make control changes. If issues are found, your team or controls contractor makes the fixes, and we can re-test to confirm the problem is resolved.</div></div>
-      <div class="faq-item"><button class="faq-question">Is this a one-time test or ongoing monitoring?<span class="faq-chevron">+</span></button><div class="faq-answer">Most clients use it as ongoing automated verification &mdash; scheduled tests and recurring weekly reports. We also offer one-time commissioning verification for new construction or system upgrades. Ongoing monitoring provides the most value since HVAC systems drift over time and seasonal changes affect performance.</div></div>
-      <div class="faq-item"><button class="faq-question">How long does setup take?<span class="faq-chevron">+</span></button><div class="faq-answer">Setup timing depends on system size and how many tests you want automated. We start with a quick discovery session to review your BAS access and equipment list, then build and validate the test plan. Most clients see their first report within 24&ndash;48 hours of onboarding.</div></div>
-      <div class="faq-item"><button class="faq-question">How is pricing structured?<span class="faq-chevron">+</span></button><div class="faq-answer">Pricing is based on the number of systems and equipment being monitored, the depth of testing required, and how frequently reports run. After a quick review of your BAS access and scope, we provide a clear, flat-rate quote. Contact us for a no-pressure conversation about your facility.</div></div>
+<!-- ── FAQ ─────────────────────────────────────────────────────────────────── -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-heading">Common Questions,<br>Straight Answers</h2>
     </div>
-    <div style="margin-top:3rem;" class="reveal"><a href="faq.html" class="btn-outline">View All FAQs &rarr;</a></div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          What exactly is a Building Automation System (BAS) and do I have one?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">A Building Automation System is the computer that controls and monitors your building's HVAC equipment — heating, cooling, ventilation, and sometimes lighting. Most commercial buildings built or renovated in the last 20 years have one. If your building has a thermostat system you can access through a web browser or a computer on-site, you likely have a BAS we can connect to. We confirm this during a free discovery session.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          What systems do you work with?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">We work with all browser-based control systems. If you can access your Building Automation System through a web browser, we can typically connect to it. During setup, we confirm what data points are available and map the signals needed for testing and reporting. We have worked with systems from major manufacturers as well as smaller proprietary systems.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          Do you make any changes to our control system?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">We operate with a minimal footprint. Our system reads your control data continuously, and for heating sequence verification, we perform brief, temporary test overrides — the same approach a commissioning engineer uses during functional testing. We never make permanent changes to your control logic or programming. Any corrective action is always handled by your team or controls contractor.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          How long does setup take?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Most clients see their first report within 24–48 hours of onboarding. We start with a quick discovery session to review your BAS access and equipment list, then build and validate the test plan. The more complex your facility, the more thorough our test mapping — but we keep the process efficient.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          Is this ongoing monitoring or a one-time test?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Most clients use it as ongoing automated monitoring — weekly tests and recurring reports delivered every Monday. We also offer one-time commissioning verification for new construction or system upgrades. Ongoing monitoring provides the most value since HVAC systems drift over time and seasonal changes continuously affect performance.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          How is pricing structured?
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a">Pricing is based on the number of systems and equipment being monitored, the depth of testing required, and reporting frequency. After a quick review of your BAS access and scope, we provide a clear, flat-rate quote with no surprises. Contact us for a no-pressure conversation about your facility.</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="cta-section">
-  <div class="cta-inner">
-    <div class="section-label reveal" style="color:var(--blue-light);">Get Started</div>
-    <h2 class="reveal">See What Your Building Has <em style="color:var(--blue-light);">Been Hiding</em></h2>
-    <p class="reveal">In a 30-minute demo, we'll show you exactly how our system connects to your BAS, what a weekly report looks like for your type of facility, and what the ROI looks like in real numbers.</p>
-    <div class="cta-btns reveal">
-      <a href="contact.html" class="btn-primary">Request a Free Demo &rarr;</a>
-      <a href="sample-report.html" class="btn-secondary">&#128196; View Sample Report</a>
+<!-- ── CTA ─────────────────────────────────────────────────────────────────── -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>See What Your Building Has Been Hiding</h2>
+      <p>In a 30-minute demo, we'll show you exactly how our system connects to your BAS, what a weekly report looks like for your type of facility, and what the ROI looks like in real numbers.</p>
+      <div class="cta-actions">
+        <a href="mailto:rickm@automatedcommissioning.com?subject=Demo Request" class="btn-primary">Request a Free Demo →</a>
+        <a href="mailto:rickm@automatedcommissioning.com?subject=Question" class="btn-ghost">Ask a Question</a>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ── FOOTER ──────────────────────────────────────────────────────────────── -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
+  <div class="container">
+    <div class="footer-grid">
       <div class="footer-brand">
         <div class="logo">Automated<span>Commissioning</span></div>
         <p>Automated HVAC diagnostics, deficiency reports, and trend analysis for buildings where conditions matter. Catch problems early. Protect your equipment. Save money.</p>
@@ -316,29 +1307,75 @@
       <div class="footer-col">
         <h4>Navigation</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="who-we-serve.html">Who We Serve</a></li>
-          <li><a href="sample-report.html">Sample Report</a></li>
-          <li><a href="https://alarm-review-app.vercel.app/demo/" target="_blank">Dashboard Demo</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#who-we-serve">Who We Serve</a></li>
+          <li><a href="#what-you-get">What You Get</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>We Serve</h4>
+        <ul>
+          <li><a href="#who-we-serve">Medical Facilities</a></li>
+          <li><a href="#who-we-serve">Surgery Centers</a></li>
+          <li><a href="#who-we-serve">Property Management</a></li>
+          <li><a href="#who-we-serve">Facility Managers</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="contact.html">Request a Demo</a></li>
-          <li><a href="contact.html">Get a Quote</a></li>
+          <li><a href="mailto:rickm@automatedcommissioning.com">rickm@automatedcommissioning.com</a></li>
+          <li><a href="#contact">Request a Demo</a></li>
+          <li><a href="https://app.automatedcommissioning.com" target="_blank">Client Portal</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 AutomatedCommissioning. All rights reserved.</p>
-      <p>Built for buildings where conditions matter.</p>
+      <span>© 2026 Automated Commissioning. All rights reserved.</span>
+      <span>Built for buildings where conditions matter.</span>
     </div>
   </div>
 </footer>
-<script src="js/main.js"></script>
+
+<script>
+  // ── Scroll reveal ──────────────────────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── FAQ accordion ──────────────────────────────────────────────────────────
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── Count-up for stat numbers ──────────────────────────────────────────────
+  const countEl = document.querySelector('[data-target="365"]');
+  if (countEl) {
+    const countObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        let count = 0;
+        const target = 365;
+        const interval = setInterval(() => {
+          count += 7;
+          countEl.textContent = count;
+          if (count >= target) { countEl.textContent = target; clearInterval(interval); }
+        }, 20);
+        countObserver.unobserve(countEl);
+      }
+    });
+    countObserver.observe(countEl);
+  }
+</script>
 </body>
 </html>
