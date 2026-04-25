@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sample Report | Automated Commissioning</title>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.report-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:4rem;}
+.report-explain h3{font-size:1.4rem;font-weight:700;margin-bottom:1rem;}
+.report-explain p{color:var(--muted);line-height:1.8;margin-bottom:1.5rem;font-size:.95rem;}
+.report-points{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+.report-points li{display:flex;gap:.75rem;align-items:flex-start;font-size:.9rem;color:var(--muted);line-height:1.6;}
+.report-points li .icon{color:var(--blue-light);font-size:1.1rem;flex-shrink:0;}
+.report-preview{background:#0a1628;border:1px solid rgba(79,140,255,.25);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);font-family:'Courier New',monospace;}
+.rp-header{background:#162847;padding:14px 18px;border-bottom:1px solid rgba(79,140,255,.15);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;}
+.rp-header span{font-size:.75rem;color:var(--muted);}
+.rp-header strong{color:var(--blue-light);font-size:.82rem;}
+.rp-greeting{padding:16px 20px 8px;color:#cbd5e1;font-size:.82rem;border-bottom:1px solid rgba(79,140,255,.1);}
+.rp-body{padding:16px 20px;}
+.rp-section-title{color:var(--blue-light);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 6px;}
+.rp-table{width:100%;border-collapse:collapse;font-size:.72rem;}
+.rp-table th{text-align:left;color:var(--muted);padding:5px 8px;border-bottom:1px solid rgba(79,140,255,.15);font-size:.65rem;text-transform:uppercase;letter-spacing:.5px;}
+.rp-table td{padding:7px 8px;color:#cbd5e1;border-bottom:1px solid rgba(255,255,255,.04);}
+.rp-table tr:hover td{background:rgba(79,140,255,.04);}
+.annotation{background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.25);border-radius:8px;padding:1rem;margin:1.5rem 0;display:flex;gap:.75rem;}
+.annotation .ann-icon{font-size:1.2rem;flex-shrink:0;}
+.annotation p{font-size:.82rem;color:#fef08a;line-height:1.6;margin:0;}
+.features-of-report{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:3rem;}
+.report-feature{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:all .3s;}
+.report-feature:hover{border-color:rgba(79,140,255,.4);transform:translateY(-2px);}
+.report-feature h4{font-size:.92rem;font-weight:700;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem;}
+.report-feature p{font-size:.82rem;color:var(--muted);line-height:1.6;}
+@media(max-width:900px){.report-layout{grid-template-columns:1fr;}.features-of-report{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Automated<span>Commissioning</span></a>
+  <ul class="nav-links">
+    <li><a href="how-it-works.html">How It Works</a></li>
+    <li><a href="who-we-serve.html">Who We Serve</a></li>
+    <li><a href="sample-report.html" class="active">Sample Report</a></li>
+    <li><a href="https://alarm-review-app.vercel.app/demo/" target="_blank">Dashboard Demo</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Request a Demo &rarr;</a>
+  <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="how-it-works.html">How It Works</a><a href="who-we-serve.html">Who We Serve</a><a href="faq.html">FAQ</a><a href="contact.html">Request a Demo</a>
+</div>
+<div class="page-header">
+  <div class="eyebrow">Sample Report</div>
+  <h1>This Is What Your Team Gets <em>Every Monday</em></h1>
+  <p>A real example of the weekly deficiency report that lands in your inbox automatically. Clear, prioritized, and written so anyone on your staff can understand and act on it.</p>
+</div>
+<section style="background:var(--navy);">
+  <div class="section-inner">
+    <div class="report-layout">
+      <div>
+        <h3 class="reveal">What's in Your Weekly Report</h3>
+        <p class="reveal">This is an actual sample report from a real diagnostic run. Below it, we explain what each section means in plain language so you can see exactly what your facility manager or building engineer would receive every week.</p>
+        <ul class="report-points reveal">
+          <li><span class="icon">&#9989;</span><strong>Passing systems are listed first</strong> &mdash; so you can quickly confirm what's working correctly before focusing on issues.</li>
+          <li><span class="icon">&#9888;&#65039;</span><strong>Issues are prioritized by severity</strong> &mdash; critical problems appear at the top, minor observations at the bottom.</li>
+          <li><span class="icon">&#128197;</span><strong>Days open is tracked</strong> &mdash; so you can see if an issue is new this week or has been present (and possibly ignored) for weeks.</li>
+          <li><span class="icon">&#128203;</span><strong>Notes explain the problem</strong> &mdash; in plain language that doesn't require an HVAC certification to understand.</li>
+          <li><span class="icon">&#127919;</span><strong>Equipment IDs tie to your BAS</strong> &mdash; so your controls contractor can find the exact device immediately.</li>
+        </ul>
+        <div class="features-of-report">
+          <div class="report-feature reveal"><h4>&#128231; Email Delivery</h4><p>Arrives in your inbox every Monday morning, ready to forward to your maintenance team.</p></div>
+          <div class="report-feature reveal reveal-delay-1"><h4>&#128187; Dashboard Backup</h4><p>Every report is also stored in your dashboard with full historical access and trend charts.</p></div>
+          <div class="report-feature reveal reveal-delay-2"><h4>&#128196; PDF Download</h4><p>Download any report as a PDF for your records, service documentation, or inspection prep.</p></div>
+          <div class="report-feature reveal reveal-delay-3"><h4>&#127975; Facility-Specific</h4><p>Tests and checks are tailored to your specific equipment types and operational priorities.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="report-preview reveal reveal-delay-1">
+          <div class="rp-header">
+            <span>Weekly Diagnostic Report</span>
+            <strong>Week of: 16-Feb thru 20-Feb 2026</strong>
+          </div>
+          <div class="rp-greeting">Hey Magan &mdash; no new critical items this week. A few items flagged for review below. Have a great week!</div>
+          <div class="rp-body">
+            <div class="rp-section-title">&#128225; Communications</div>
+            <table class="rp-table">
+              <thead><tr><th>Zone / Serves</th><th>Equip. ID</th><th>Comm</th><th>Date</th><th>Status</th></tr></thead>
+              <tbody><tr><td colspan="5" style="color:#34d399;font-style:italic;">No Alarms Found &mdash; All systems communicating normally</td></tr></tbody>
+            </table>
+            <div class="rp-section-title">&#127777;&#65039; VAV Space Temperature</div>
+            <table class="rp-table">
+              <thead><tr><th>Zone</th><th>Equip. ID</th><th>RMT-SP</th><th>RM-T</th><th>Offset</th><th>Status</th></tr></thead>
+              <tbody><tr><td colspan="6" style="color:#34d399;font-style:italic;">No Alarms Found &mdash; All zone temps within setpoint</td></tr></tbody>
+            </table>
+            <div class="rp-section-title">&#127968; RTU's (Rooftop Units)</div>
+            <table class="rp-table">
+              <thead><tr><th>Zone</th><th>Equip. ID</th><th>Comm</th><th>SA-T</th><th>Duct SP</th><th>Status</th></tr></thead>
+              <tbody><tr><td colspan="6" style="color:#34d399;font-style:italic;">No Alarms Found &mdash; RTUs operating normally</td></tr></tbody>
+            </table>
+            <div class="rp-section-title">&#9832;&#65039; VAV Heating (Review Items)</div>
+            <table class="rp-table">
+              <thead><tr><th>Zone</th><th>ID</th><th>Stage 1</th><th>Stage 2</th><th>Stage 3</th><th>Notes</th><th>Days</th></tr></thead>
+              <tbody>
+                <tr><td>Pre-Op</td><td>VAV-3</td><td>70.3</td><td>70.1</td><td>90.3</td><td><span class="badge badge-warn">Possible issue with 1 stg of 3 stg heat.</span></td><td>2</td></tr>
+                <tr><td>Decon Rm.</td><td>VAV-11</td><td>49.9</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-warn">Possible issue with single stg heat.</span></td><td>2</td></tr>
+                <tr><td>Locker Rm.</td><td>FPB-1</td><td>64</td><td>76.6</td><td>&mdash;</td><td><span class="badge badge-warn">Possible issue with 1 stg of 2 stg heat.</span></td><td>2</td></tr>
+                <tr><td>Office</td><td>FPB-2</td><td>72.8</td><td>87.2</td><td>&mdash;</td><td><span class="badge badge-warn">Possible issue with 1 stg of 2 stg heat.</span></td><td>2</td></tr>
+                <tr><td>Waiting Rm.</td><td>FPB-3</td><td>71.9</td><td>80.9</td><td>&mdash;</td><td><span class="badge badge-warn">Possible issue with 1 stg of 2 stg heat.</span></td><td>2</td></tr>
+              </tbody>
+            </table>
+            <div class="rp-section-title">&#128168; VAV Airflows</div>
+            <table class="rp-table">
+              <thead><tr><th>Zone</th><th>ID</th><th>Design CFM</th><th>Actual CFM</th><th>Damper %</th><th>Notes</th><th>Days</th></tr></thead>
+              <tbody><tr><td>Locker Rm.</td><td>FPB-1</td><td>1760</td><td>1482</td><td>100</td><td><span class="badge badge-crit">Airflow is below design setpoint.</span></td><td>1</td></tr></tbody>
+            </table>
+            <div class="rp-section-title">&#128168; Exhaust Fans</div>
+            <table class="rp-table">
+              <thead><tr><th>Zone</th><th>ID</th><th>Start/Stop</th><th>EF Status</th><th>Notes</th><th>Days</th></tr></thead>
+              <tbody><tr><td>Lobby RR</td><td>TEF-3</td><td>Start</td><td>Off</td><td><span class="badge badge-crit">EF command is ON. Status is OFF.</span></td><td>2</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="annotation reveal">
+          <div class="ann-icon">&#128161;</div>
+          <p><strong>What does this mean?</strong> The VAV heating entries show that heating stages aren't all firing as expected &mdash; which could mean equipment wear or a controls issue. The lobby exhaust fan is being commanded ON but is showing OFF status, which is a real fault that needs immediate attention. The airflow below design on the Locker Room means that space isn't getting its required ventilation rate. All of this was caught automatically before a tenant or patient complained.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section style="background:linear-gradient(180deg,var(--navy2) 0%,var(--navy) 100%);">
+  <div class="section-inner section-center">
+    <div class="section-label reveal">Live Dashboard</div>
+    <h2 class="section-title reveal">Beyond the Email: Your <em>Live Dashboard</em></h2>
+    <p class="section-sub reveal">Every data point from every weekly report is stored in your personal dashboard. View trends, drill into equipment history, and see exactly how performance changes over time &mdash; all from any browser.</p>
+    <div style="margin-top:2.5rem;" class="reveal">
+      <a href="https://alarm-review-app.vercel.app/demo/" target="_blank" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">&#128187; Open Live Dashboard Demo &rarr;</a>
+    </div>
+    <p style="color:var(--muted);font-size:.82rem;margin-top:1rem;" class="reveal">Opens in a new tab. This is a real demo with sample data &mdash; no login required.</p>
+  </div>
+</section>
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="reveal">Ready to Get Reports Like This for <em style="color:var(--blue-light);">Your Building?</em></h2>
+    <p class="reveal">Setup takes less than 48 hours. Your first report arrives the following Monday. No technical knowledge required on your end.</p>
+    <div class="cta-btns reveal"><a href="contact.html" class="btn-primary">Request a Free Demo &rarr;</a><a href="how-it-works.html" class="btn-secondary">See How It Works</a></div>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="logo">Automated<span>Commissioning</span></div><p>Automated HVAC diagnostics for buildings where conditions matter.</p></div>
+      <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="how-it-works.html">How It Works</a></li><li><a href="who-we-serve.html">Who We Serve</a></li><li><a href="sample-report.html">Sample Report</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Request a Demo</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 AutomatedCommissioning. All rights reserved.</p></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
