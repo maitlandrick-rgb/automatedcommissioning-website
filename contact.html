@@ -1,118 +1,675 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Request a Demo | Automated Commissioning</title>
-<link rel="stylesheet" href="css/style.css"/>
-<style>
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem;}
-.expect-list{display:flex;flex-direction:column;gap:1.5rem;}
-.expect-item{display:flex;gap:1rem;padding:1.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;}
-.expect-item .icon{font-size:1.8rem;flex-shrink:0;}
-.expect-item h4{font-weight:700;margin-bottom:.3rem;}
-.expect-item p{color:var(--muted);font-size:.88rem;line-height:1.6;}
-.form-card{background:linear-gradient(135deg,#0f2040,#162847);border:1px solid rgba(79,140,255,.25);border-radius:20px;padding:2.5rem;}
-.form-card h2{font-size:1.5rem;font-weight:700;margin-bottom:.5rem;}
-.form-card p{color:var(--muted);font-size:.9rem;margin-bottom:2rem;line-height:1.6;}
-.form-group{margin-bottom:1.25rem;}
-.form-group label{display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem;color:#cbd5e1;}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(79,140,255,.25);border-radius:8px;padding:.75rem 1rem;color:var(--white);font-family:var(--font);font-size:.9rem;transition:border-color .2s;outline:none;}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue-light);background:rgba(79,140,255,.07);}
-.form-group select option{background:#0f2040;color:var(--white);}
-.form-group textarea{resize:vertical;min-height:100px;}
-.form-submit{width:100%;padding:1rem;font-size:1rem;font-weight:700;margin-top:.5rem;}
-.form-note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:1rem;}
-.form-success{text-align:center;padding:2rem;}
-.form-success .success-icon{font-size:3rem;margin-bottom:1rem;}
-.form-success h3{font-size:1.4rem;font-weight:700;margin-bottom:.75rem;}
-.form-success p{color:var(--muted);}
-@media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Request a free demo or ask a question about Automated Commissioning's HVAC diagnostic services." />
+  <title>Contact — Automated Commissioning</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #080f1c;
+      --panel:    #0f1829;
+      --panel-2:  #162036;
+      --panel-3:  #1c2a42;
+      --text:     #e8eefc;
+      --muted:    #8a9bbf;
+      --border:   #1e2d47;
+      --accent:   #4f8cff;
+      --accent-d: #3a7aef;
+      --green:    #22c55e;
+      --amber:    #f59e0b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(8, 15, 28, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 62px;
+      display: flex;
+      align-items: center;
+    }
+
+    nav .container { width: 100%; }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .logo {
+      flex: 1;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+      flex-shrink: 0;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 9px 20px;
+      border-radius: 8px;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--accent-d); color: #fff; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+    }
+
+    /* ── PAGE ────────────────────────────────────────────────────────────── */
+    .page-wrap {
+      padding: 110px 0 80px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(79,140,255,0.1);
+      border: 1px solid rgba(79,140,255,0.25);
+      border-radius: 50px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .page-header h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent) 0%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-header p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── TYPE TABS ───────────────────────────────────────────────────────── */
+    .type-tabs {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .type-tab {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--panel);
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-family: inherit;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .type-tab svg { flex-shrink: 0; }
+
+    .type-tab:hover {
+      border-color: rgba(79,140,255,0.4);
+      color: var(--text);
+    }
+
+    .type-tab.active {
+      border-color: var(--accent);
+      background: rgba(79,140,255,0.08);
+      color: var(--text);
+    }
+
+    .type-tab .tab-label { font-size: 15px; font-weight: 700; }
+    .type-tab .tab-sub   { font-size: 12px; color: var(--muted); font-weight: 400; display: block; margin-top: 2px; }
+
+    /* ── LAYOUT ──────────────────────────────────────────────────────────── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 760px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .type-tabs { flex-direction: column; align-items: stretch; }
+      .type-tab { justify-content: center; }
+    }
+
+    /* ── INFO PANEL ──────────────────────────────────────────────────────── */
+    .info-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+    }
+
+    .info-panel h3 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+    .info-item:last-of-type { margin-bottom: 0; }
+
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(79,140,255,0.1);
+      border: 1px solid rgba(79,140,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .info-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .info-value a { color: var(--accent); }
+    .info-value a:hover { text-decoration: underline; }
+
+    .info-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 28px 0;
+    }
+
+    .response-promise {
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .rp-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .rp-text {
+      font-size: 13px;
+      color: #86efac;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* ── FORM PANEL ──────────────────────────────────────────────────────── */
+    .form-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 36px;
+    }
+
+    .form-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .form-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-panel { padding: 24px 20px; }
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus { border-color: var(--accent); }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .field select option { background: var(--panel-2); }
+
+    /* Demo-specific extra fields */
+    .demo-fields { display: block; }
+    .question-fields { display: none; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: inherit;
+      border: none;
+      border-radius: 11px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 4px;
+    }
+
+    .submit-btn:hover { background: var(--accent-d); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-status {
+      margin-top: 14px;
+      font-size: 14px;
+      text-align: center;
+      min-height: 20px;
+    }
+    .form-status.ok  { color: var(--green); }
+    .form-status.err { color: #f87171; }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      margin-top: 40px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+  </style>
 </head>
 <body>
-<nav id="navbar">
-  <a href="index.html" class="nav-logo">Automated<span>Commissioning</span></a>
-  <ul class="nav-links">
-    <li><a href="how-it-works.html">How It Works</a></li>
-    <li><a href="who-we-serve.html">Who We Serve</a></li>
-    <li><a href="sample-report.html">Sample Report</a></li>
-    <li><a href="https://alarm-review-app.vercel.app/demo/" target="_blank">Dashboard Demo</a></li>
-    <li><a href="faq.html">FAQ</a></li>
-  </ul>
-  <a href="contact.html" class="nav-cta active">Request a Demo &rarr;</a>
-  <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a><a href="how-it-works.html">How It Works</a><a href="who-we-serve.html">Who We Serve</a><a href="faq.html">FAQ</a>
-</div>
 
-<div class="page-header">
-  <div class="eyebrow">Free 30-Minute Demo</div>
-  <h1>See Your Building's Hidden Issues <em>Live</em></h1>
-  <p>No sales pressure. No technical jargon. Just a clear walkthrough of how automated diagnostics work for your specific type of facility &mdash; and what it would look like for your building.</p>
-</div>
-
-<section style="background:var(--navy);">
-  <div class="section-inner">
-    <div class="contact-grid">
-      <div>
-        <div class="section-label reveal">What to Expect</div>
-        <h2 class="section-title reveal">Your Demo, <em>Your Way</em></h2>
-        <p class="section-sub reveal" style="margin-bottom:2.5rem;">We keep it short, focused, and practical. Here's what we'll cover in 30 minutes:</p>
-        <div class="expect-list">
-          <div class="expect-item reveal"><div class="icon">&#128172;</div><div><h4>Your Setup</h4><p>A brief conversation about your current Building Automation System (BAS) and the challenges you're facing right now &mdash; no preparation needed.</p></div></div>
-          <div class="expect-item reveal reveal-delay-1"><div class="icon">&#128187;</div><div><h4>Live Dashboard Walkthrough</h4><p>We'll show you exactly how our automated diagnostics work &mdash; using real data from a facility similar to yours &mdash; so you can see what your weekly reports would look like.</p></div></div>
-          <div class="expect-item reveal reveal-delay-2"><div class="icon">&#128176;</div><div><h4>Real ROI, Real Numbers</h4><p>We'll show you how the system connects securely without disrupting operations, and walk through the expected return on investment for your building size and type.</p></div></div>
-          <div class="expect-item reveal reveal-delay-3"><div class="icon">&#128203;</div><div><h4>Next Steps</h4><p>If it's a fit, we'll outline exactly how onboarding works and what your first report would include. No obligation, no pressure.</p></div></div>
-        </div>
-        <div style="margin-top:2.5rem;padding:1.5rem;background:rgba(79,140,255,.08);border:1px solid rgba(79,140,255,.2);border-radius:12px;" class="reveal">
-          <p style="color:var(--blue-light);font-weight:700;margin-bottom:.5rem;">&#128073; Especially relevant for:</p>
-          <p style="color:var(--muted);font-size:.9rem;line-height:1.7;">Medical and surgical facilities &bull; Eye care centers &bull; Property management companies &bull; Commercial office buildings &bull; Any facility with critical environmental requirements</p>
-        </div>
-      </div>
-      <div class="reveal reveal-delay-1">
-        <div class="form-card">
-          <h2>Request Your Free Demo</h2>
-          <p>Fill out the form and we'll be in touch within 24 hours to schedule a time that works for you.</p>
-          <form id="contactForm">
-            <div class="form-group"><label for="name">Full Name *</label><input type="text" id="name" name="name" placeholder="Your name" required/></div>
-            <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email" placeholder="your@email.com" required/></div>
-            <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" placeholder="(555) 000-0000"/></div>
-            <div class="form-group"><label for="company">Company / Facility Name *</label><input type="text" id="company" name="company" placeholder="e.g. Riverside Eye Surgery Center" required/></div>
-            <div class="form-group">
-              <label for="facility">Facility Type *</label>
-              <select id="facility" name="facility" required>
-                <option value="">Select your facility type...</option>
-                <option>Medical / Surgical Facility</option>
-                <option>Eye Care / Ophthalmology Center</option>
-                <option>Commercial Office Building</option>
-                <option>Multi-Family / Apartment Complex</option>
-                <option>Property Management Company</option>
-                <option>School / University</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="form-group"><label for="bas">BAS / Control System (if known)</label><input type="text" id="bas" name="bas" placeholder="e.g. Niagara, Tridium, Andover, Delta..."/></div>
-            <div class="form-group"><label for="message">What's your biggest HVAC challenge right now?</label><textarea id="message" name="message" placeholder="Tell us what you're dealing with..."></textarea></div>
-            <button type="submit" class="btn-primary form-submit">Request My Free Demo &rarr;</button>
-            <p class="form-note">&#128274; Your information is never shared. We'll respond within 24 hours.</p>
-          </form>
-        </div>
+<!-- ── NAV ────────────────────────────────────────────────────────────────── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Automated<span>Commissioning</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#who-we-serve">Who We Serve</a></li>
+        <li><a href="index.html#what-you-get">What You Get</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="contact.html" class="nav-cta">Request a Demo →</a>
       </div>
     </div>
   </div>
-</section>
+</nav>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand"><div class="logo">Automated<span>Commissioning</span></div><p>Automated HVAC diagnostics for buildings where conditions matter.</p></div>
-      <div class="footer-col"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="how-it-works.html">How It Works</a></li><li><a href="who-we-serve.html">Who We Serve</a></li><li><a href="sample-report.html">Sample Report</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Request a Demo</a></li><li><a href="contact.html">Get a Quote</a></li></ul></div>
+<!-- ── PAGE ───────────────────────────────────────────────────────────────── -->
+<div class="page-wrap">
+  <div class="container">
+
+    <div class="page-header">
+      <div class="page-badge">Get in Touch</div>
+      <h1>Let's Talk About<br><em>Your Building</em></h1>
+      <p>Whether you want to see the system in action or just have a question — we're easy to reach and quick to respond.</p>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 AutomatedCommissioning. All rights reserved.</p></div>
+
+    <!-- Type Tabs -->
+    <div class="type-tabs">
+      <button class="type-tab active" id="tab-demo" onclick="setTab('demo')">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <div>
+          <span class="tab-label">Request a Free Demo</span>
+          <span class="tab-sub">See a live walkthrough of the system</span>
+        </div>
+      </button>
+      <button class="type-tab" id="tab-question" onclick="setTab('question')">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div>
+          <span class="tab-label">Ask a Question</span>
+          <span class="tab-sub">Pricing, capabilities, or anything else</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Two-column layout -->
+    <div class="contact-layout">
+
+      <!-- Left: Info -->
+      <div class="info-panel">
+        <h3>Contact Information</h3>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value"><a href="mailto:rickm@automatedcommissioning.com">rickm@automatedcommissioning.com</a></div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <div class="info-label">Website</div>
+            <div class="info-value"><a href="https://www.automatedcommissioning.com" target="_blank">automatedcommissioning.com</a></div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="info-label">Service Area</div>
+            <div class="info-value">Dallas–Fort Worth, TX</div>
+          </div>
+        </div>
+
+        <hr class="info-divider">
+
+        <div class="response-promise">
+          <div class="rp-dot"></div>
+          <div class="rp-text">We respond to all inquiries within one business day — usually same day.</div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="form-panel">
+        <div class="form-title" id="form-title">Request a Free Demo</div>
+        <div class="form-sub" id="form-sub">Tell us about your facility and we'll set up a 30-minute walkthrough showing exactly what the system would look like for you.</div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="cf-name">Your Name *</label>
+            <input type="text" id="cf-name" placeholder="First Last" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="cf-company">Company / Facility *</label>
+            <input type="text" id="cf-company" placeholder="Your organization" autocomplete="organization">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="cf-phone">Phone Number</label>
+            <input type="tel" id="cf-phone" placeholder="(555) 555-5555" autocomplete="tel">
+          </div>
+          <div class="field demo-fields">
+            <label for="cf-facility">Facility Type</label>
+            <select id="cf-facility">
+              <option value="">Select type…</option>
+              <option>Ambulatory Surgery Center</option>
+              <option>Medical Office / Clinic</option>
+              <option>Hospital</option>
+              <option>Commercial Building</option>
+              <option>Property Management</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field question-fields" style="display:none">
+            <label for="cf-topic">Topic</label>
+            <select id="cf-topic">
+              <option value="">Select topic…</option>
+              <option>Pricing</option>
+              <option>Capabilities</option>
+              <option>Technical / Integration</option>
+              <option>General</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="cf-message">Message *</label>
+          <textarea id="cf-message" id="form-message-placeholder" placeholder="Tell us about your facility, your current BAS, and what problems you're trying to solve…"></textarea>
+        </div>
+
+        <button class="submit-btn" id="cf-submit" onclick="submitForm()">Send Request →</button>
+        <div class="form-status" id="cf-status"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2026 Automated Commissioning. All rights reserved.</span>
+      <span><a href="index.html" style="color:var(--accent)">← Back to Home</a></span>
+    </div>
   </div>
 </footer>
-<script src="js/main.js"></script>
+
+<script>
+  const API_URL = "https://script.google.com/macros/s/AKfycbyZmEjtQM3nxfEJapcQu5y2nYKm9vL_Rrbac8nkv2G3B-4-Lu5FT2PfD16j4IhOreYw/exec";
+  let currentTab = 'demo';
+
+  function setTab(tab) {
+    currentTab = tab;
+    document.getElementById('tab-demo').classList.toggle('active', tab === 'demo');
+    document.getElementById('tab-question').classList.toggle('active', tab === 'question');
+
+    const demoFields     = document.querySelectorAll('.demo-fields');
+    const questionFields = document.querySelectorAll('.question-fields');
+
+    if (tab === 'demo') {
+      demoFields.forEach(el => el.style.display = '');
+      questionFields.forEach(el => el.style.display = 'none');
+      document.getElementById('form-title').textContent = 'Request a Free Demo';
+      document.getElementById('form-sub').textContent   = 'Tell us about your facility and we\'ll set up a 30-minute walkthrough showing exactly what the system would look like for you.';
+      document.getElementById('cf-submit').textContent  = 'Send Request →';
+      document.getElementById('cf-message').placeholder = 'Tell us about your facility, your current BAS, and what problems you\'re trying to solve…';
+    } else {
+      demoFields.forEach(el => el.style.display = 'none');
+      questionFields.forEach(el => el.style.display = '');
+      document.getElementById('form-title').textContent = 'Ask a Question';
+      document.getElementById('form-sub').textContent   = 'Pricing, how it works technically, what systems we integrate with — ask us anything.';
+      document.getElementById('cf-submit').textContent  = 'Send Question →';
+      document.getElementById('cf-message').placeholder = 'What would you like to know?';
+    }
+
+    document.getElementById('cf-status').textContent = '';
+  }
+
+  // Pre-select tab based on URL query param (?type=question)
+  const urlTab = new URLSearchParams(window.location.search).get('type');
+  if (urlTab === 'question') setTab('question');
+
+  async function submitForm() {
+    const name    = document.getElementById('cf-name').value.trim();
+    const company = document.getElementById('cf-company').value.trim();
+    const phone   = document.getElementById('cf-phone').value.trim();
+    const message = document.getElementById('cf-message').value.trim();
+    const statusEl = document.getElementById('cf-status');
+    const btn      = document.getElementById('cf-submit');
+
+    if (!name) { statusEl.textContent = 'Please enter your name.'; statusEl.className = 'form-status err'; return; }
+    if (!company) { statusEl.textContent = 'Please enter your company or facility name.'; statusEl.className = 'form-status err'; return; }
+    if (!message) { statusEl.textContent = 'Please enter a message.'; statusEl.className = 'form-status err'; return; }
+
+    const extra = currentTab === 'demo'
+      ? document.getElementById('cf-facility').value
+      : document.getElementById('cf-topic').value;
+
+    const issueType = currentTab === 'demo'
+      ? 'Demo Request' + (extra ? ` — ${extra}` : '')
+      : 'General Inquiry' + (extra ? ` — ${extra}` : '');
+
+    btn.disabled = true;
+    statusEl.textContent = 'Sending…';
+    statusEl.className = 'form-status';
+
+    try {
+      const params = new URLSearchParams({
+        action:    'demoInquiry',
+        name,
+        company,
+        phone,
+        issueType,
+        message,
+      });
+
+      const resp   = await fetch(API_URL, { method: 'POST', body: params });
+      const result = await resp.json();
+      if (!result.success) throw new Error(result.error || 'Unknown error');
+
+      statusEl.textContent = '✓ Message sent — we\'ll be in touch within one business day!';
+      statusEl.className = 'form-status ok';
+
+      document.getElementById('cf-name').value    = '';
+      document.getElementById('cf-company').value = '';
+      document.getElementById('cf-phone').value   = '';
+      document.getElementById('cf-message').value = '';
+      document.getElementById('cf-facility').value = '';
+      document.getElementById('cf-topic').value   = '';
+      btn.disabled = false;
+
+    } catch (err) {
+      statusEl.textContent = 'Error sending — please email rickm@automatedcommissioning.com directly.';
+      statusEl.className = 'form-status err';
+      btn.disabled = false;
+    }
+  }
+</script>
 </body>
 </html>
