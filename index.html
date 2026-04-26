@@ -932,15 +932,15 @@
           </div>
           <div class="report-stats">
             <div class="report-stat">
-              <div class="report-stat-num blue">14</div>
+              <div class="report-stat-num blue" id="hero-systems">—</div>
               <div class="report-stat-label">Systems Checked</div>
             </div>
             <div class="report-stat">
-              <div class="report-stat-num amber">3</div>
+              <div class="report-stat-num amber" id="hero-issues">—</div>
               <div class="report-stat-label">Issues Found</div>
             </div>
             <div class="report-stat">
-              <div class="report-stat-num green">11</div>
+              <div class="report-stat-num green" id="hero-passing">—</div>
               <div class="report-stat-label">Passing</div>
             </div>
           </div>
@@ -953,31 +953,8 @@
                 <th>Days</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>OR Suite 1</td>
-                <td>Room Pressure</td>
-                <td><span class="status-pill status-ok">OK</span></td>
-                <td style="color:var(--muted)">—</td>
-              </tr>
-              <tr>
-                <td>Pre-Op</td>
-                <td>VAV Heating</td>
-                <td><span class="status-pill status-rev">Review</span></td>
-                <td style="color:var(--amber)">2</td>
-              </tr>
-              <tr>
-                <td>Sterile Storage</td>
-                <td>Humidity</td>
-                <td><span class="status-pill status-ok">OK</span></td>
-                <td style="color:var(--muted)">—</td>
-              </tr>
-              <tr>
-                <td>Lobby EF</td>
-                <td>Fan Status</td>
-                <td><span class="status-pill status-alert">Alert</span></td>
-                <td style="color:var(--red)">1</td>
-              </tr>
+            <tbody id="hero-rows">
+              <tr><td colspan="4" style="text-align:center;color:var(--muted);padding:18px 0">Loading…</td></tr>
             </tbody>
           </table>
           <div class="report-footer">
@@ -1381,6 +1358,72 @@
     });
     countObserver.observe(countEl);
   }
+
+  // ── Live hero card data ────────────────────────────────────────────────────
+  (async function loadHeroCard() {
+    const API = "https://script.google.com/macros/s/AKfycbyZmEjtQM3nxfEJapcQu5y2nYKm9vL_Rrbac8nkv2G3B-4-Lu5FT2PfD16j4IhOreYw/exec";
+    const tbody   = document.getElementById('hero-rows');
+    const elSys   = document.getElementById('hero-systems');
+    const elIss   = document.getElementById('hero-issues');
+    const elPass  = document.getElementById('hero-passing');
+
+    try {
+      const res  = await fetch(API);
+      const json = await res.json();
+      const raw  = (json && json.data !== undefined) ? json.data : json;
+
+      const rows = raw.map(r => ({
+        zone:   String(r["Serves"]        ?? "").trim(),
+        check:  String(r["Alarm"]         ?? r["Type"] ?? "").trim(),
+        status: String(r["Review Status"] ?? "New").trim() || "New",
+        days:   String(r["Days"]          ?? "").trim(),
+      }));
+
+      // Stats
+      const statusRank = s => ({ "New": 0, "Review": 1, "OK": 2, "Resolved": 2 }[s] ?? 0);
+      const isIssue    = s => s === "New" || s === "Review";
+
+      const total   = rows.length;
+      const issues  = rows.filter(r => isIssue(r.status)).length;
+      const passing = rows.filter(r => !isIssue(r.status)).length;
+
+      elSys.textContent  = total;
+      elIss.textContent  = issues;
+      elPass.textContent = passing;
+
+      // Top 4 rows — alerts first, then reviews, then OK
+      const sorted = [...rows].sort((a, b) => statusRank(a.status) - statusRank(b.status));
+      const top4   = sorted.slice(0, 4);
+
+      tbody.innerHTML = top4.map(r => {
+        const s = r.status;
+        const [cls, label] = s === "New"      ? ["status-alert", "Alert"]
+                           : s === "Review"   ? ["status-rev",   "Review"]
+                           : s === "Resolved" ? ["status-ok",    "OK"]
+                           :                    ["status-ok",    "OK"];
+        const daysCol = isIssue(s) && r.days
+          ? `<td style="color:${s==="New"?"var(--red)":"var(--amber)"}">${r.days}</td>`
+          : `<td style="color:var(--muted)">—</td>`;
+        return `<tr>
+          <td>${r.zone || "—"}</td>
+          <td>${r.check || "—"}</td>
+          <td><span class="status-pill ${cls}">${label}</span></td>
+          ${daysCol}
+        </tr>`;
+      }).join('');
+
+    } catch (e) {
+      // Fallback to static data silently
+      tbody.innerHTML = `
+        <tr><td>OR Suite 1</td><td>Room Pressure</td><td><span class="status-pill status-ok">OK</span></td><td style="color:var(--muted)">—</td></tr>
+        <tr><td>Pre-Op</td><td>VAV Heating</td><td><span class="status-pill status-rev">Review</span></td><td style="color:var(--amber)">2</td></tr>
+        <tr><td>Sterile Storage</td><td>Humidity</td><td><span class="status-pill status-ok">OK</span></td><td style="color:var(--muted)">—</td></tr>
+        <tr><td>Lobby EF</td><td>Fan Status</td><td><span class="status-pill status-alert">Alert</span></td><td style="color:var(--red)">1</td></tr>`;
+      elSys.textContent  = 14;
+      elIss.textContent  = 3;
+      elPass.textContent = 11;
+    }
+  })();
 </script>
 </body>
 </html>
