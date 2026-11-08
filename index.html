@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Automated Commissioning delivers weekly HVAC diagnostics, deficiency reports, and trend analysis for medical facilities, surgery centers, and commercial buildings." />
+  <meta name="description" content="Automated Commissioning delivers weekly HVAC diagnostics, deficiency reports, and trend analysis for medical facilities, surgery centers, data centers, and commercial buildings." />
   <title>Automated Commissioning | Weekly HVAC Diagnostics for Buildings</title>
   <style>
     /* ── Reset & Variables ──────────────────────────────────────────────── */
@@ -739,7 +739,7 @@
 
     .serve-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
     }
 
@@ -766,6 +766,7 @@
     .serve-icon-wrap.blue   { background: rgba(79,140,255,0.12); }
     .serve-icon-wrap.purple { background: rgba(124,92,252,0.12); }
     .serve-icon-wrap.teal   { background: rgba(20,184,166,0.12); }
+    .serve-icon-wrap.green  { background: rgba(47,168,79,0.12); }
 
     .serve-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
     .serve-card > p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
@@ -1280,6 +1281,21 @@
         </ul>
       </div>
       <div class="serve-card reveal">
+        <div class="serve-icon-wrap green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2fa84f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="6" rx="1.5"/><rect x="3" y="15" width="18" height="6" rx="1.5"/><line x1="7" y1="6" x2="7.01" y2="6"/><line x1="7" y1="18" x2="7.01" y2="18"/><line x1="12" y1="9" x2="12" y2="15"/></svg>
+        </div>
+        <h3>Data Centers</h3>
+        <p>Your BAS tells you what it's commanding. Foresite proves what the cooling equipment is actually doing — every day, not just at turnover.</p>
+        <ul class="serve-list">
+          <li>Active tests: commands equipment and measures the real temperature rise, airflow and ΔT against design</li>
+          <li>Compares command, proof of run and physical result, so an "On" that isn't working gets caught</li>
+          <li>Flags drift from design intent long before a BAS alarm limit trips</li>
+          <li>Verified, engineer-reviewed alarms instead of BAS alarm noise</li>
+          <li>Independent, documented performance record for SLAs and audits</li>
+          <li>Works with CRAHs, CRACs, fan walls, chillers, pumps, VAVs and fan-powered boxes</li>
+        </ul>
+      </div>
+      <div class="serve-card reveal">
         <div class="serve-icon-wrap purple">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c5cfc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         </div>
@@ -1571,6 +1587,7 @@
         <ul>
           <li><a href="#who-we-serve">Medical Facilities</a></li>
           <li><a href="#who-we-serve">Surgery Centers</a></li>
+          <li><a href="#who-we-serve">Data Centers</a></li>
           <li><a href="#who-we-serve">Property Management</a></li>
           <li><a href="#who-we-serve">Facility Managers</a></li>
         </ul>
